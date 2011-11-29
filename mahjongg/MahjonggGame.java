@@ -26,6 +26,8 @@ public class MahjonggGame extends GridGame
         // TODO
         this.gridBoard = new MahjonggBoard<MahjonggTile>();
         this.gridBoard.setParent(this);
+
+        this.gridStatus = new MahjonggStatus();
     }
     
     public void makeMove(int row, int col)
