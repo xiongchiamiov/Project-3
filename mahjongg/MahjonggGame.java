@@ -6,7 +6,7 @@ import gridgame.GridStatus;
 
 public class MahjonggGame extends GridGame
 {
-    protected GridBoard gridBoard;
+    protected MahjonggBoard gridBoard;
     protected GridStatus gridStatus;
     
     public GridBoard getBoardToView()
@@ -24,8 +24,9 @@ public class MahjonggGame extends GridGame
     public void init()
     {
         // TODO
-        this.gridBoard = new MahjonggBoard<MahjonggTile>();
+        this.gridBoard = new MahjonggBoard();
         this.gridBoard.setParent(this);
+        this.gridBoard.resetBoard();
 
         this.gridStatus = new MahjonggStatus();
     }
