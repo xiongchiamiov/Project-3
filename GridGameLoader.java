@@ -41,7 +41,7 @@ public class GridGameLoader
             System.exit(ReturnCode.UNABLE_TO_FIND_CLASS.ordinal());
         }
 
-        GridGUI gridGUI;
+        GridGUI gridGUI = null;
         GridGame gridGame = null;
         try
         {
@@ -61,6 +61,8 @@ public class GridGameLoader
         }
 
         gridGame.init();
+        gridGUI.createUI();
+        gridGUI.setVisible(true);
     }
 }
 
