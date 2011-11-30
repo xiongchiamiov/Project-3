@@ -12,7 +12,7 @@ public class MahjonggBoard extends GridBoard<MahjonggTile>
     private static final int kBoardWidth = 12;
     private static final int kBoardHeight = 8;
     private static final int[] blankEdgeMahjonggTiles = { 0, 2, 1, 0, 0, 1, 2, 0 };
-    private int tileCount = 0;
+    protected int tileCount = 0;
     private int firstTileRow = -1;
     private int firstTileColumn = -1;
     
@@ -67,10 +67,6 @@ public class MahjonggBoard extends GridBoard<MahjonggTile>
                 }
             }
         }
-        
-        //this.secondsElapsed = 0;
-        //updateStatusBar();
-        //setTitle("Mahjongg - board " + this.gameNumber);
     }
     
     protected void clearBoard()

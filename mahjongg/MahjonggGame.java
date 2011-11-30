@@ -5,19 +5,22 @@ import gridgame.GridGame;
 import gridgame.GridStatus;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.util.List;
 import java.util.Arrays;
 import javax.swing.Action;
 import javax.swing.AbstractAction;
-import javax.swing.KeyStroke;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
+import javax.swing.Timer;
 
 public class MahjonggGame extends GridGame
 {
     protected MahjonggBoard gridBoard;
     protected GridStatus gridStatus;
+    private int secondsElapsed = 0;
     
     public GridBoard getBoardToView()
     {
@@ -39,24 +42,46 @@ public class MahjonggGame extends GridGame
         this.gridBoard.resetBoard();
 
         this.gridStatus = new MahjonggStatus();
+        this.startTimer();
     }
     
     public void makeMove(int row, int col)
     {
-        System.out.println(row + ", " + col);
         this.gridBoard.clickTile(row, col);
+        this.updateStatusBar();
         setChanged();
         notifyObservers();
     }
     
     public void restart()
     {
-        // TODO
         this.gridBoard.resetBoard();
-        //this.secondsElapsed = 0;
-        //updateStatusBar();
+        this.secondsElapsed = 0;
+        this.updateStatusBar();
         setChanged();
         notifyObservers(this.getGame());
+    }
+    
+    protected void startTimer()
+    {
+        // Every 1 second.
+        Timer timer = new Timer(1000, new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                MahjonggGame.this.secondsElapsed++;
+                MahjonggGame.this.updateStatusBar();
+            }
+        });
+        
+        this.updateStatusBar();
+        timer.start();
+    }
+    
+    protected void updateStatusBar()
+    {
+       this.gridStatus.setLabelText("Tiles Left: " + this.gridBoard.tileCount + "  "
+                                  + "Time: " + this.secondsElapsed / 60 + ":" + String.format("%02d", this.secondsElapsed % 60));
     }
     
     public List<Action> getMenuActions()
