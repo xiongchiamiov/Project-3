@@ -22,7 +22,6 @@ public class GridGameLoader
         
         String className = args[0];
         className = className.toLowerCase() + "." + className;
-        System.out.println(className);
         Class<GridGUI> gridGuiClass = null; // The Java compiler's not very smart.
         Class<GridGame> gridGameClass = null;
         try
