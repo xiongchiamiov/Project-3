@@ -12,6 +12,7 @@ import javax.swing.Action;
 import javax.swing.AbstractAction;
 import javax.swing.KeyStroke;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 public class MahjonggGame extends GridGame
 {
@@ -105,7 +106,18 @@ public class MahjonggGame extends GridGame
 
         public void actionPerformed(ActionEvent e)
         {
-            System.out.println("Hint");
+            MahjonggTile hintTile = MahjonggGame.this.gridBoard.findOpenPair();
+            if (hintTile == null)
+            {
+                JOptionPane.showMessageDialog(null, "No moves available.");
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Hint: " + hintTile.toString());
+            }
+            
+            MahjonggGame.this.setChanged();
+            MahjonggGame.this.notifyObservers();
         }
     }
 

@@ -3,6 +3,7 @@ package mahjongg;
 import gridgame.GridBoard;
 import gridgame.Renderable;
 
+import java.util.Collections;
 import java.util.LinkedList;
 
 public class MahjonggBoard extends GridBoard<MahjonggTile>
@@ -86,6 +87,93 @@ public class MahjonggBoard extends GridBoard<MahjonggTile>
         this.grid[(this.kBoardHeight / 2) - 1][(this.kBoardWidth / 2) - 1] = new MahjonggTile(MahjonggTile.Suit.Bamboo, 1);
         this.grid[(this.kBoardHeight / 2) - 1][(this.kBoardWidth / 2)] = new MahjonggTile(MahjonggTile.Suit.Bamboo, 1);
         this.tileCount = 2;
+    }
+
+    protected MahjonggTile findOpenPair()
+    {
+        java.util.List<MahjonggTile> edgeTiles = edgeTiles();
+        Collections.<MahjonggTile>sort(edgeTiles);
+
+        MahjonggTile previous = null;
+        for (MahjonggTile current : edgeTiles)
+        {
+            if (current.equals(previous))
+            {
+                return current;
+            }
+
+            previous = current;
+        }
+
+        return null;
+    }
+
+    protected java.util.List<MahjonggTile> edgeTiles()
+    {
+        // This is a lazy and terribly inefficient way to do this.
+        java.util.List<MahjonggTile> edgeTiles = new LinkedList<MahjonggTile>();
+        for (int row = 0; row < this.kBoardHeight; row++)
+        {
+            for (int column = 0; column < this.kBoardWidth; column++)
+            {
+                if (isEdgeTile(row, column) && this.grid[row][column] != null)
+                {
+                    edgeTiles.add((MahjonggTile)this.grid[row][column]);
+                }
+            }
+        }
+        
+        return edgeTiles;
+    }
+    
+    protected boolean isEdgeTile(final int row, final int column)
+    {
+        // Basic sanity check.
+        if (row < 0 || row > this.kBoardHeight || column < 0 || column > this.kBoardWidth)
+        {
+            throw new IllegalArgumentException("Tile must be on the board.");
+        }
+        
+        // Style guidelines prevent use of the 'break' statement.  So, poor man's break.
+        boolean kontinue = true;
+        // Is this a left-side tile?
+        int i = 0;
+        while (kontinue && i < this.kBoardWidth)
+        {
+            if (this.grid[row][i] != null)
+            {
+                if (i == column)
+                {
+                    return true;
+                }
+                // Nope, we reached a non-null tile that isn't the one we want.
+                else
+                {
+                    kontinue = false;
+                }
+            }
+            
+            i++;
+        }
+        
+        // Is this a right-side tile?
+        i = column + 1;
+        while (true)
+        {
+            // We reached the end of the row.  Congratulations!
+            if (i == this.kBoardWidth)
+            {
+                return true;
+            }
+            
+            // Nope, there's a tile to the right of the one we're examining.
+            if (this.grid[row][i] != null)
+            {
+                return false;
+            }
+            
+            i++;
+        }
     }
 }
 
