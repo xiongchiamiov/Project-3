@@ -5,6 +5,7 @@ import gridgame.Renderable;
 
 import java.util.Collections;
 import java.util.LinkedList;
+import javax.swing.JOptionPane;
 
 public class MahjonggBoard extends GridBoard<MahjonggTile>
 {
@@ -12,6 +13,8 @@ public class MahjonggBoard extends GridBoard<MahjonggTile>
     private static final int kBoardHeight = 8;
     private static final int[] blankEdgeMahjonggTiles = { 0, 2, 1, 0, 0, 1, 2, 0 };
     private int tileCount = 0;
+    private int firstTileRow = -1;
+    private int firstTileColumn = -1;
     
     protected void resetBoard()
     {
@@ -173,6 +176,51 @@ public class MahjonggBoard extends GridBoard<MahjonggTile>
             }
             
             i++;
+        }
+    }
+    
+    protected void clickTile(final int row, final int column)
+    {
+        // Basic sanity check.
+        if (row < 0 || row > this.kBoardHeight || column < 0 || column > this.kBoardWidth)
+        {
+            throw new IllegalArgumentException("Tile must be on the board.");
+        }
+        
+        // Do we already have a first tile in the pair we want to compare?
+        if (this.firstTileRow > -1 && this.firstTileColumn > -1)
+        {
+            MahjonggTile tile1 = (MahjonggTile)this.grid[this.firstTileRow][this.firstTileColumn];
+            MahjonggTile tile2 = (MahjonggTile)this.grid[row][column];
+            
+            if (!(this.firstTileRow == row && this.firstTileColumn == column)
+             && tile1.equals(tile2) && isEdgeTile(this.firstTileRow, this.firstTileColumn) && isEdgeTile(row, column))
+            {
+                this.grid[this.firstTileRow][this.firstTileColumn] = this.grid[row][column] = null;
+                this.tileCount -= 2;
+                //this.updateStatusBar();
+
+                if (this.tileCount == 0)
+                {
+                    JOptionPane.showMessageDialog(null, "You win!");
+                }
+                
+                // Reset our state variables.
+                this.firstTileRow = -1;
+                this.firstTileColumn = -1;
+            }
+            // Nope, those tiles aren't a valid match.
+            else
+            {
+                // Let the second-clicked tile become our new selected "first" tile.
+                this.firstTileRow = row;
+                this.firstTileColumn = column;
+            }
+        }
+        else
+        {
+            this.firstTileRow = row;
+            this.firstTileColumn = column;
         }
     }
 }

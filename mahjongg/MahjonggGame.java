@@ -43,7 +43,10 @@ public class MahjonggGame extends GridGame
     
     public void makeMove(int row, int col)
     {
-        // TODO
+        System.out.println(row + ", " + col);
+        this.gridBoard.clickTile(row, col);
+        setChanged();
+        notifyObservers();
     }
     
     public void restart()
