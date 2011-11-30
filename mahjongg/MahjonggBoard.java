@@ -58,7 +58,7 @@ public class MahjonggBoard extends GridBoard<MahjonggTile>
                  || column > this.kBoardWidth - this.blankEdgeMahjonggTiles[line] - 1
                  || tiles.isEmpty())
                 {
-                    this.grid[line][column] = null;
+                    this.grid[line][column] = new HiddenMahjonggTile();
                 }
                 else
                 {
@@ -75,7 +75,7 @@ public class MahjonggBoard extends GridBoard<MahjonggTile>
         {
             for (int column = 0; column < this.kBoardWidth; column++)
             {
-                this.grid[row][column] = null;
+                this.grid[row][column] = new HiddenMahjonggTile();
             }
         }
     }
@@ -139,7 +139,7 @@ public class MahjonggBoard extends GridBoard<MahjonggTile>
         int i = 0;
         while (kontinue && i < this.kBoardWidth)
         {
-            if (this.grid[row][i] != null)
+            if (!(this.grid[row][i] instanceof HiddenMahjonggTile))
             {
                 if (i == column)
                 {
@@ -166,7 +166,7 @@ public class MahjonggBoard extends GridBoard<MahjonggTile>
             }
             
             // Nope, there's a tile to the right of the one we're examining.
-            if (this.grid[row][i] != null)
+            if (!(this.grid[row][i] instanceof HiddenMahjonggTile))
             {
                 return false;
             }
@@ -192,7 +192,7 @@ public class MahjonggBoard extends GridBoard<MahjonggTile>
             if (!(this.firstTileRow == row && this.firstTileColumn == column)
              && tile1.equals(tile2) && isEdgeTile(this.firstTileRow, this.firstTileColumn) && isEdgeTile(row, column))
             {
-                this.grid[this.firstTileRow][this.firstTileColumn] = this.grid[row][column] = null;
+                this.grid[this.firstTileRow][this.firstTileColumn] = this.grid[row][column] = new HiddenMahjonggTile();
                 this.tileCount -= 2;
                 //this.updateStatusBar();
 

@@ -8,7 +8,7 @@ import gridgame.RenderDescriptor;
 
 class MahjonggTile extends ImageIcon implements Comparable<MahjonggTile>, Renderable
 {
-    public enum Suit {Bamboo, Dots, Characters};
+    public enum Suit {Bamboo, Dots, Characters, Null};
     
     private Suit suit;
     private int rank;
