@@ -15,7 +15,6 @@ class MahjonggTile extends ImageIcon implements Comparable<MahjonggTile>, Render
     
     public MahjonggTile(Suit suit, int rank)
     {
-        //super(Toolkit.getDefaultToolkit().getImage(Mahjongg.class.getResource("img/" + suit.name().substring(0, 1) + rank + ".JPG")));
         if (rank < 1 || rank > 7)
         {
             throw new IllegalArgumentException("Rank must be between 1 and 7");
