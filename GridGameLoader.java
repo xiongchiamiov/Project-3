@@ -61,6 +61,7 @@ public class GridGameLoader
         }
 
         gridGame.init();
+        gridGame.addObserver(gridGUI);
         gridGUI.createUI();
         gridGUI.setVisible(true);
     }
