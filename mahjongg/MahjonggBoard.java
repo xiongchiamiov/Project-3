@@ -79,5 +79,13 @@ public class MahjonggBoard extends GridBoard<MahjonggTile>
             }
         }
     }
+
+    protected void cheat()
+    {
+        this.clearBoard();
+        this.grid[(this.kBoardHeight / 2) - 1][(this.kBoardWidth / 2) - 1] = new MahjonggTile(MahjonggTile.Suit.Bamboo, 1);
+        this.grid[(this.kBoardHeight / 2) - 1][(this.kBoardWidth / 2)] = new MahjonggTile(MahjonggTile.Suit.Bamboo, 1);
+        this.tileCount = 2;
+    }
 }
 

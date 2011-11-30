@@ -119,7 +119,9 @@ public class MahjonggGame extends GridGame
 
         public void actionPerformed(ActionEvent e)
         {
-            System.out.println("Cheat");
+            MahjonggGame.this.gridBoard.cheat();
+            MahjonggGame.this.setChanged();
+            MahjonggGame.this.notifyObservers();
         }
     }
 
