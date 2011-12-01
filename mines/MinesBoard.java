@@ -16,9 +16,9 @@ public class MinesBoard extends GridBoard<MinesTile>
     // Override GridBoard's parent attribute so we don't have to do casts.
     private MinesGame parent;
 
-    private static final int kBoardWidth = 10;
-    private static final int kBoardHeight = 10;
-    private static final int kMaxBombs = 9;
+    private static int kBoardWidth = 8;
+    private static int kBoardHeight = 8;
+    private static int kMaxBombs = 8;
     protected int numBombs = 0;
     private boolean justCheated = false;
 
@@ -29,14 +29,7 @@ public class MinesBoard extends GridBoard<MinesTile>
     
     protected void resetBoard()
     {
-        if (this.grid == null)
-        {
-            this.grid = new MinesTile[this.kBoardHeight][this.kBoardWidth];
-        }
-        else
-        {
-            clearBoard();
-        }
+        this.grid = new MinesTile[this.kBoardHeight][this.kBoardWidth];
 
         // Fill the board with normal (non-bomb) pieces.
         for (int line = 0; line < this.kBoardHeight; line++)
@@ -66,17 +59,6 @@ public class MinesBoard extends GridBoard<MinesTile>
         {
             MinesTile tile = (MinesTile)this.grid[bombCoordinates.first][bombCoordinates.second];
             tile.isBomb = true;
-        }
-    }
-    
-    protected void clearBoard()
-    {
-        for (int row = 0; row < this.kBoardHeight; row++)
-        {
-            for (int column = 0; column < this.kBoardWidth; column++)
-            {
-                this.grid[row][column] = null;
-            }
         }
     }
 
@@ -281,6 +263,16 @@ public class MinesBoard extends GridBoard<MinesTile>
         }
         
         return true;
+    }
+    
+    public void setSize(int size)
+    {
+        this.kBoardWidth = this.kBoardHeight = size;
+    }
+
+    public void setDifficulty(int difficulty)
+    {
+        this.kMaxBombs = (this.kBoardWidth * this.kBoardHeight) / difficulty;
     }
 }
 

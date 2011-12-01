@@ -68,6 +68,11 @@ public class MinesGame extends GridGame
     
     public void restart()
     {
+        int size = Integer.parseInt(this.myPrefs.get("Board Size"));
+        int difficulty = Integer.parseInt(this.myPrefs.get("Difficulty"));
+        this.gridBoard.setSize(size);
+        this.gridBoard.setDifficulty(difficulty);
+
         this.gridBoard.resetBoard();
         this.secondsElapsed = 0;
         this.updateStatusBar();
