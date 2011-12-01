@@ -24,7 +24,7 @@ public class MinesGame extends GridGame
     private static final int kMaxGameNumber = 5000;
 
     protected int moves = 0;
-    private int flagsPlaced = 0;
+    protected int flagsPlaced = 0;
     protected int secondsElapsed = 0;
     
     public GridBoard getBoardToView()
@@ -57,6 +57,14 @@ public class MinesGame extends GridGame
         setChanged();
         notifyObservers();
     }
+
+	public void handleRightClick(int row, int col)
+	{
+        this.gridBoard.handleRightClick(row, col);
+        this.updateStatusBar();
+        setChanged();
+        notifyObservers();
+	}
     
     public void restart()
     {
