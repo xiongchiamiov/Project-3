@@ -186,6 +186,9 @@ public class RoundupBoard extends GridBoard<RoundupTile>
     private static int kBoardWidth = 7;
     private static int kBoardHeight = 7;
 
+    private int selectedRobotRow = 0;
+    private int selectedRobotColumn = 0;
+
     public void setParent(RoundupGame parent)
     {
         this.parent = parent;
@@ -237,7 +240,8 @@ public class RoundupBoard extends GridBoard<RoundupTile>
         }
         
         RoundupTile tile = (RoundupTile)this.grid[row][column];
-        // TODO: Select robot.
+        this.selectedRobotRow = row;
+        this.selectedRobotColumn = column;
     }
 }
 
