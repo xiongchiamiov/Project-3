@@ -58,13 +58,13 @@ public class MinesGame extends GridGame
         notifyObservers();
     }
 
-	public void handleRightClick(int row, int col)
-	{
+    public void handleRightClick(int row, int col)
+    {
         this.gridBoard.handleRightClick(row, col);
         this.updateStatusBar();
         setChanged();
         notifyObservers();
-	}
+    }
     
     public void restart()
     {
@@ -75,19 +75,19 @@ public class MinesGame extends GridGame
         notifyObservers(this.getGame());
     }
 
-	private void selectGame()
-	{
-		String gameNumber = (String)JOptionPane.showInputDialog(null, "Enter desired game number (1 - 5000):", "Select Game", JOptionPane.QUESTION_MESSAGE, null, null, "");
-		if (gameNumber != null)
-		{
-			int parsedGameNumber = Integer.parseInt(gameNumber);
-			if (parsedGameNumber > 0 && parsedGameNumber <= this.kMaxGameNumber)
-			{
-				this.setGame(parsedGameNumber);
-				this.restart();
-			}
-		}
-	}
+    private void selectGame()
+    {
+        String gameNumber = (String)JOptionPane.showInputDialog(null, "Enter desired game number (1 - 5000):", "Select Game", JOptionPane.QUESTION_MESSAGE, null, null, "");
+        if (gameNumber != null)
+        {
+            int parsedGameNumber = Integer.parseInt(gameNumber);
+            if (parsedGameNumber > 0 && parsedGameNumber <= this.kMaxGameNumber)
+            {
+                this.setGame(parsedGameNumber);
+                this.restart();
+            }
+        }
+    }
     
     protected void startTimer()
     {

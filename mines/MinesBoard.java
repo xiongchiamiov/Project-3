@@ -155,8 +155,8 @@ public class MinesBoard extends GridBoard<MinesTile>
         }
     }
     
-	public void handleRightClick(int row, int column)
-	{
+    public void handleRightClick(int row, int column)
+    {
         // Basic sanity check.
         if (row < 0 || row >= this.kBoardHeight || column < 0 || column >= this.kBoardWidth)
         {
@@ -174,7 +174,7 @@ public class MinesBoard extends GridBoard<MinesTile>
             tile.status = Piece.hidden;
             this.parent.flagsPlaced--;
         }
-	}
+    }
     
     /**
      * Calculate how many bombs are adjacent to a spot.
