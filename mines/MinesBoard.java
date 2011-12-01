@@ -139,7 +139,7 @@ public class MinesBoard extends GridBoard<MinesTile>
                     {
                         String name = (String)JOptionPane.showInputDialog(null, "Your score of "+time+" will be entered into the Hall of Fame.  Enter your name:", "Hall of Fame Entry", JOptionPane.QUESTION_MESSAGE, null, null, "");
                         HallOfFame<HallOfFameEntry<String>> hallOfFame =
-                         new HallOfFame<HallOfFameEntry<String>>();
+                         new HallOfFame<HallOfFameEntry<String>>("mines");
                         hallOfFame.add(new HallOfFameEntry<String>(time, name));
                     }
                 }
