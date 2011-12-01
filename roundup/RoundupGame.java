@@ -192,7 +192,15 @@ public class RoundupGame extends GridGame
 
         public void actionPerformed(ActionEvent e)
         {
-            // TODO: Show about dialog.
+            String aboutText = "Roundup Version 1.0\n" +
+            "Click on a robot then press a cursor key to move the robot.\n" +
+            "The robot will move in a straight line in the direction specified.\n" +
+            "The robot can only stop when it runs into another robot, or\n" +
+            "walks off the board. Your goal is to guide the red robot to\n" +
+            "end up positioned on the center squre.\n" +
+            "There are 18 puzzles that can be played in any order.\n" +
+            "Android Icon by http://madeliniz.deviantart.com";
+            JOptionPane.showMessageDialog(null, aboutText, "About", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
