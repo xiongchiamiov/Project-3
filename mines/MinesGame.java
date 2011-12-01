@@ -41,7 +41,7 @@ public class MinesGame extends GridGame
     
     public void init()
     {
-        this.setGame(1);
+        this.setGame((new java.util.Random()).nextInt(this.kMaxGameNumber));
         this.gridBoard = new MinesBoard();
         this.gridBoard.setParent(this);
         this.gridBoard.resetBoard();
