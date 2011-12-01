@@ -15,12 +15,12 @@ class RoundupTile extends ImageIcon implements Renderable
     protected RobotDirection robotDirection = RobotDirection.up;
     protected boolean isDot = false;
     protected boolean isCenterTile = false;
+    protected boolean isEdgeTile = false;
     
     public RenderDescriptor getRenderDescriptor()
     {
         RenderDescriptor renderDescriptor = new RenderDescriptor();
         
-        // TODO
         renderDescriptor.isImage = true;
         if (this.robot == Robot.none)
         {

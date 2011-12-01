@@ -34,11 +34,15 @@ public class RoundupBoard extends GridBoard<RoundupTile>
             for (int column = 0; column < this.kBoardWidth; column++)
             {
                 this.grid[line][column] = new RoundupTile();
+                if (line == 0 || column == 0
+                 || line == this.kBoardHeight-1 || column == this.kBoardWidth-1)
+                {
+                    this.grid[line][column].isEdgeTile = true;
+                }
             }
         }
         this.grid[this.kBoardHeight/2][this.kBoardWidth/2].isCenterTile = true;
         
-        // TODO: Mark edges as black wall tiles.
         // TODO: Place robots.
     }
 
