@@ -11,9 +11,9 @@ class RoundupTile extends ImageIcon implements Renderable
     public static enum Robot { none, red, green, dead };
     public static enum RobotDirection { up, right, down, left };
 
-    private Robot robot = Robot.none;
-    private RobotDirection robotDirection = RobotDirection.up;
-    private boolean isDot = false;
+    protected Robot robot = Robot.none;
+    protected RobotDirection robotDirection = RobotDirection.up;
+    protected boolean isDot = false;
     protected boolean isCenterTile = false;
     
     public RenderDescriptor getRenderDescriptor()
@@ -32,6 +32,10 @@ class RoundupTile extends ImageIcon implements Renderable
             {
                 renderDescriptor.text = "empty";
             }
+        }
+        else
+        {
+            renderDescriptor.text = this.robot.toString() + this.robotDirection.toString();
         }
         
         return renderDescriptor;
