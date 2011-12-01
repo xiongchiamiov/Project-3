@@ -28,7 +28,7 @@ public class RoundupBoard extends GridBoard<RoundupTile>
     {
         this.grid = new RoundupTile[this.kBoardHeight][this.kBoardWidth];
 
-        // Fill the board with normal (non-bomb) pieces.
+        // Fill the board with unoccupied pieces.
         for (int line = 0; line < this.kBoardHeight; line++)
         {
             for (int column = 0; column < this.kBoardWidth; column++)
@@ -36,9 +36,9 @@ public class RoundupBoard extends GridBoard<RoundupTile>
                 this.grid[line][column] = new RoundupTile();
             }
         }
+        this.grid[this.kBoardHeight/2][this.kBoardWidth/2].isCenterTile = true;
         
         // TODO: Mark edges as black wall tiles.
-        // TODO: Mark center square as pink.
         // TODO: Place robots.
     }
 
