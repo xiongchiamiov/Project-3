@@ -22,12 +22,12 @@ public class GridGameLoader
         
         String className = args[0];
         className = className.toLowerCase() + "." + className;
-        Class<GridGUI> gridGuiClass = null; // The Java compiler's not very smart.
-        Class<GridGame> gridGameClass = null;
+        Class gridGuiClass = null; // The Java compiler's not very smart.
+        Class gridGameClass = null;
         try
         {
-            gridGuiClass = (Class<GridGUI>)Class.forName(className+"GUI");
-            gridGameClass = (Class<GridGame>)Class.forName(className+"Game");
+            gridGuiClass = Class.forName(className+"GUI");
+            gridGameClass = Class.forName(className+"Game");
         }
         catch (ClassNotFoundException e)
         {
@@ -45,9 +45,9 @@ public class GridGameLoader
         try
         {
             gridGame = (GridGame)gridGameClass.newInstance();
-            Constructor<GridGUI> gridGuiConstructor = gridGuiClass.getConstructor(
+            Constructor gridGuiConstructor = gridGuiClass.getConstructor(
              new Class[] { String.class, gridGameClass });
-            gridGUI = gridGuiConstructor.newInstance(
+            gridGUI = (GridGUI)gridGuiConstructor.newInstance(
              new Object[] { args[0], gridGame });
         }
         catch (InstantiationException e) {}
