@@ -135,7 +135,7 @@ public class MahjonggGame extends GridGame
         public void actionPerformed(ActionEvent e)
         {
             MahjonggTile hintTile = MahjonggGame.this.gridBoard.findOpenPair();
-            if (hintTile == null)
+            if (hintTile instanceof HiddenMahjonggTile)
             {
                 JOptionPane.showMessageDialog(null, "No moves available.");
             }
