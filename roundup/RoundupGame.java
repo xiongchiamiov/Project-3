@@ -26,7 +26,7 @@ public class RoundupGame extends GridGame implements CursorKeyAdapter
 
     protected int moves = 0;
     protected int secondsElapsed = 0;
-    private boolean gameLost = false;
+    protected boolean gameLost = false;
     
     public GridBoard getBoardToView()
     {
