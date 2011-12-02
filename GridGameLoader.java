@@ -22,12 +22,12 @@ public class GridGameLoader
         
         String className = args[0];
         className = className.toLowerCase() + "." + className;
-        Class gridGuiClass = null; // The Java compiler's not very smart.
-        Class gridGameClass = null;
+        //Class<GridGUI> gridGuiClass = null; // The Java compiler's not very smart.
+        Class<GridGame> gridGameClass = null;
         try
         {
-            gridGuiClass = Class.forName(className+"GUI");
-            gridGameClass = Class.forName(className+"Game");
+            //gridGuiClass = (Class<GridGUI>)Class.forName(className+"GUI");
+            gridGameClass = (Class<GridGame>)Class.forName(className+"Game");
         }
         catch (ClassNotFoundException e)
         {
@@ -45,19 +45,20 @@ public class GridGameLoader
         try
         {
             gridGame = (GridGame)gridGameClass.newInstance();
-            Constructor gridGuiConstructor = gridGuiClass.getConstructor(
-             new Class[] { String.class, gridGameClass });
-            gridGUI = (GridGUI)gridGuiConstructor.newInstance(
-             new Object[] { args[0], gridGame });
+            //Constructor<GridGUI> gridGuiConstructor = gridGuiClass.getConstructor(
+            // new Class[] { String.class, gridGameClass });
+            //gridGUI = gridGuiConstructor.newInstance(
+            // new Object[] { args[0], gridGame });
+            gridGUI = new GridGUI(args[0], gridGame);
         }
         catch (InstantiationException e) {}
         catch (IllegalAccessException e) {}
-        catch (java.lang.reflect.InvocationTargetException e) {}
-        catch (NoSuchMethodException e)
+        //catch (java.lang.reflect.InvocationTargetException e) {}
+        /*catch (NoSuchMethodException e)
         {
             System.err.println("No constructor found for "+className+"GUI with a argument list of size 2.");
             System.exit(ReturnCode.NO_CONSTRUCTOR_FOUND.ordinal());
-        }
+        }*/
 
         gridGame.init();
         gridGame.addObserver(gridGUI);
