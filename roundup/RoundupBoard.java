@@ -289,10 +289,16 @@ public class RoundupBoard extends GridBoard<RoundupTile>
                                                       robot);
         this.grid[row][column].robotDirection = direction;
         
-        // Do we have a robot here?
+        // Is there no robot here?
         if (this.grid[row][column].robot == RoundupTile.Robot.none)
         {
             this.grid[row][column].isDot = true;
+        }
+        // Did we win?
+        else if (this.grid[row][column].robot == RoundupTile.Robot.red
+              && this.grid[row][column].isCenterTile)
+        {
+            this.gameWonDialog();
         }
         
         // Tell the previous tile they don't have a robot.
@@ -307,6 +313,21 @@ public class RoundupBoard extends GridBoard<RoundupTile>
             {
                 this.grid[line][column].isDot = false;
             }
+        }
+    }
+    
+    private void gameWonDialog()
+    {
+        int choice = JOptionPane.showConfirmDialog(null, "You won!\nSave your time?", "Win Dialog", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        // Magic number for "Yes"
+        if (choice == 0)
+        {
+            String name = (String)JOptionPane.showInputDialog(null, "Enter your name:", "Hall of Fame Entry", JOptionPane.QUESTION_MESSAGE, null, null, "");
+            HallOfFame<HallOfFameEntry<String>> hallOfFame =
+             new HallOfFame<HallOfFameEntry<String>>("roundup");
+            hallOfFame.add(RoundupHallOfFameEntry.generate(this.parent.secondsElapsed,
+                                                           this.parent.getGame(),
+                                                           name));
         }
     }
 }
