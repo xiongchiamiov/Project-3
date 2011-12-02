@@ -304,6 +304,7 @@ public class RoundupBoard extends GridBoard<RoundupTile>
         else if (this.grid[row][column].robot == RoundupTile.Robot.red
               && this.grid[row][column].isCenterTile)
         {
+            this.parent.gameWon = true;
             this.gameWonDialog();
         }
         

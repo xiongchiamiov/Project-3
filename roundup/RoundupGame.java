@@ -27,6 +27,7 @@ public class RoundupGame extends GridGame implements CursorKeyAdapter
     protected int moves = 0;
     protected int secondsElapsed = 0;
     protected boolean gameLost = false;
+    protected boolean gameWon = false;
     protected StringBuilder moveList;
     
     public GridBoard getBoardToView()
@@ -53,7 +54,7 @@ public class RoundupGame extends GridGame implements CursorKeyAdapter
     
     public void makeMove(int row, int col)
     {
-        if (this.gameLost)
+        if (this.gameLost || this.gameWon)
         {
             return;
         }
@@ -128,6 +129,7 @@ public class RoundupGame extends GridGame implements CursorKeyAdapter
         this.moveList = new StringBuilder();
         this.moves = 0;
         this.gameLost = false;
+        this.gameWon = false;
         this.updateStatusBar();
         setChanged();
         notifyObservers("bkgd");
