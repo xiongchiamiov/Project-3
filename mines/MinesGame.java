@@ -83,7 +83,7 @@ public class MinesGame extends GridGame
     private void selectGame()
     {
         String gameNumber = (String)JOptionPane.showInputDialog(null, "Enter desired game number (1 - 5000):", "Select Game", JOptionPane.QUESTION_MESSAGE, null, null, "");
-        if (gameNumber != null)
+        if (!gameNumber.equals(""))
         {
             int parsedGameNumber = Integer.parseInt(gameNumber);
             if (parsedGameNumber > 0 && parsedGameNumber <= this.kMaxGameNumber)
