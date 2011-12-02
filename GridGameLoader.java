@@ -1,5 +1,7 @@
+import gridgame.GridBoard;
 import gridgame.GridGUI;
 import gridgame.GridGame;
+import gridgame.GridStatus;
 
 import java.lang.reflect.Constructor;
 
@@ -24,10 +26,14 @@ public class GridGameLoader
         className = className.toLowerCase() + "." + className;
         //Class<GridGUI> gridGuiClass = null; // The Java compiler's not very smart.
         Class<GridGame> gridGameClass = null;
+        Class<GridBoard> gridBoardClass = null;
+        Class<GridStatus> gridStatusClass = null;
         try
         {
             //gridGuiClass = (Class<GridGUI>)Class.forName(className+"GUI");
             gridGameClass = (Class<GridGame>)Class.forName(className+"Game");
+            gridBoardClass = (Class<GridBoard>)Class.forName(className+"Board");
+            gridStatusClass = (Class<GridStatus>)Class.forName(className+"Status");
         }
         catch (ClassNotFoundException e)
         {
@@ -42,8 +48,12 @@ public class GridGameLoader
 
         GridGUI gridGUI = null;
         GridGame gridGame = null;
+        GridBoard gridBoard = null;
+        GridStatus gridStatus = null;
         try
         {
+            gridStatus = gridStatusClass.newInstance();
+            gridBoard = gridBoardClass.newInstance();
             gridGame = (GridGame)gridGameClass.newInstance();
             //Constructor<GridGUI> gridGuiConstructor = gridGuiClass.getConstructor(
             // new Class[] { String.class, gridGameClass });
@@ -51,8 +61,8 @@ public class GridGameLoader
             // new Object[] { args[0], gridGame });
             gridGUI = new GridGUI(args[0], gridGame);
         }
-        catch (InstantiationException e) {}
-        catch (IllegalAccessException e) {}
+        catch (InstantiationException e) { e.printStackTrace(); }
+        catch (IllegalAccessException e) { e.printStackTrace(); }
         //catch (java.lang.reflect.InvocationTargetException e) {}
         /*catch (NoSuchMethodException e)
         {
@@ -60,6 +70,7 @@ public class GridGameLoader
             System.exit(ReturnCode.NO_CONSTRUCTOR_FOUND.ordinal());
         }*/
 
+        gridBoard.setParent(gridGame);
         gridGame.init();
         gridGame.addObserver(gridGUI);
         gridGUI.createUI();
