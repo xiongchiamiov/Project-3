@@ -9,7 +9,22 @@ import gridgame.RenderDescriptor;
 class RoundupTile extends ImageIcon implements Renderable
 {
     public static enum Robot { none, red, green, dead };
-    public static enum RobotDirection { up, right, down, left };
+    public static enum RobotDirection
+    {
+        up(-1, 0),
+        right(0, 1),
+        down(1, 0),
+        left(0, -1);
+        
+        public final int row;
+        public final int column;
+        
+        private RobotDirection(int row, int column)
+        {
+            this.row = row;
+            this.column = column;
+        }
+    };
 
     protected Robot robot = Robot.none;
     protected RobotDirection robotDirection = RobotDirection.up;

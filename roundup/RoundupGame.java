@@ -1,5 +1,6 @@
 package roundup;
 
+import gridgame.CursorKeyAdapter;
 import gridgame.GridBoard;
 import gridgame.GridGame;
 import gridgame.GridStatus;
@@ -16,7 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import javax.swing.Timer;
 
-public class RoundupGame extends GridGame
+public class RoundupGame extends GridGame implements CursorKeyAdapter
 {
     protected RoundupBoard gridBoard;
     protected GridStatus gridStatus;
@@ -55,7 +56,41 @@ public class RoundupGame extends GridGame
         setChanged();
         notifyObservers();
     }
-
+    
+    public CursorKeyAdapter getKeyAdapter()
+    {
+        return this;
+    }
+    
+    public void processDown()
+    {
+        this.gridBoard.go(RoundupTile.RobotDirection.down);
+        this.updateStatusBar();
+        setChanged();
+        notifyObservers();
+    }
+    public void processLeft()
+    {
+        this.gridBoard.go(RoundupTile.RobotDirection.left);
+        this.updateStatusBar();
+        setChanged();
+        notifyObservers();
+    }
+    public void processRight()
+    {
+        this.gridBoard.go(RoundupTile.RobotDirection.right);
+        this.updateStatusBar();
+        setChanged();
+        notifyObservers();
+    }
+    public void processUp()
+    {
+        this.gridBoard.go(RoundupTile.RobotDirection.up);
+        this.updateStatusBar();
+        setChanged();
+        notifyObservers();
+    }
+    
     public void restart()
     {
         this.gridBoard.resetBoard();

@@ -239,9 +239,73 @@ public class RoundupBoard extends GridBoard<RoundupTile>
             throw new IllegalArgumentException("Tile must be on the board.");
         }
         
-        RoundupTile tile = (RoundupTile)this.grid[row][column];
         this.selectedRobotRow = row;
         this.selectedRobotColumn = column;
+    }
+
+    protected void go(final RoundupTile.RobotDirection direction)
+    {
+        // Don't do anything if we don't have a robot selected.
+        if (this.selectedRobotRow == 0 || this.selectedRobotColumn == 0)
+        {
+            return;
+        }
+        
+        this.clearDots();
+        // Temporarily pull robot off the board for the sake of our recursive algorithm.
+        RoundupTile.Robot movingRobot = this.grid[this.selectedRobotRow][this.selectedRobotColumn].robot;
+        this.grid[this.selectedRobotRow][this.selectedRobotColumn].robot = RoundupTile.Robot.none;
+        this.moveRobot(this.selectedRobotRow, this.selectedRobotColumn, direction, movingRobot);
+        
+        this.parent.moves++;
+        // Require the user to select a robot each time.
+        this.selectedRobotRow = 0;
+        this.selectedRobotColumn = 0;
+    }
+    
+    private RoundupTile.Robot moveRobot(int row, int column, RoundupTile.RobotDirection direction, RoundupTile.Robot robot)
+    {
+        // Stop moving if we've hit a border.
+        if (row == 0 || column == 0
+         || row == this.kBoardHeight-1 || column == this.kBoardWidth-1)
+        {
+            this.grid[row][column].robot = RoundupTile.Robot.dead;
+            this.grid[row][column].robotDirection = direction;
+            return RoundupTile.Robot.none;
+        }
+        
+        // Stop moving if we hit another robot.
+        if (this.grid[row][column].robot != RoundupTile.Robot.none)
+        {
+            return robot;
+        }
+        
+        // Try moving to the next tile.
+        this.grid[row][column].robot = this.moveRobot(row + direction.row,
+                                                      column + direction.column,
+                                                      direction,
+                                                      robot);
+        this.grid[row][column].robotDirection = direction;
+        
+        // Do we have a robot here?
+        if (this.grid[row][column].robot == RoundupTile.Robot.none)
+        {
+            this.grid[row][column].isDot = true;
+        }
+        
+        // Tell the previous tile they don't have a robot.
+        return RoundupTile.Robot.none;
+    }
+    
+    private void clearDots()
+    {
+        for (int line = 0; line < this.kBoardHeight; line++)
+        {
+            for (int column = 0; column < this.kBoardWidth; column++)
+            {
+                this.grid[line][column].isDot = false;
+            }
+        }
     }
 }
 
