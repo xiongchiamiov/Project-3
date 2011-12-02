@@ -210,6 +210,10 @@ public class RoundupGame extends GridGame implements CursorKeyAdapter
         public void actionPerformed(ActionEvent e)
         {
             RoundupGame.this.incrementGame();
+            if (RoundupGame.this.getGame() > RoundupGame.this.kMaxGameNumber)
+            {
+                RoundupGame.this.setGame(1);
+            }
             RoundupGame.this.secondsElapsed = 0;
             RoundupGame.this.restart();
         }
