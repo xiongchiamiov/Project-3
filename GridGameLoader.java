@@ -54,21 +54,21 @@ public class GridGameLoader
         {
             gridStatus = gridStatusClass.newInstance();
             gridBoard = gridBoardClass.newInstance();
-            gridGame = gridGameClass.newInstance();
-            //Constructor<GridGUI> gridGuiConstructor = gridGuiClass.getConstructor(
-            // new Class[] { String.class, gridGameClass });
-            //gridGUI = gridGuiConstructor.newInstance(
-            // new Object[] { args[0], gridGame });
+            Constructor<GridGame> gridGameConstructor = gridGameClass.getConstructor(
+             new Class[] { gridBoardClass, gridStatusClass });
+            gridGame = gridGameConstructor.newInstance(
+             new Object[] { gridBoard, gridStatus });
             gridGUI = new GridGUI(args[0], gridGame);
         }
         catch (InstantiationException e) { e.printStackTrace(); }
         catch (IllegalAccessException e) { e.printStackTrace(); }
-        //catch (java.lang.reflect.InvocationTargetException e) {}
-        /*catch (NoSuchMethodException e)
+        catch (java.lang.reflect.InvocationTargetException e) {}
+        catch (NoSuchMethodException e)
         {
-            System.err.println("No constructor found for "+className+"GUI with a argument list of size 2.");
+            e.printStackTrace();
+            System.err.println("No constructor found for "+className+"Game with a argument list of size 2.");
             System.exit(ReturnCode.NO_CONSTRUCTOR_FOUND.ordinal());
-        }*/
+        }
 
         gridBoard.setParent(gridGame);
         gridGame.init();

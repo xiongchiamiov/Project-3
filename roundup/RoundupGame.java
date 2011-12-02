@@ -30,6 +30,11 @@ public class RoundupGame extends GridGame implements CursorKeyAdapter
     protected boolean gameWon = false;
     protected StringBuilder moveList;
     
+    public RoundupGame(RoundupBoard board, RoundupStatus status)
+    {
+        super();
+    }
+    
     public GridBoard getBoardToView()
     {
         return this.gridBoard;

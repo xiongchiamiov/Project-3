@@ -27,6 +27,11 @@ public class MinesGame extends GridGame
     protected int flagsPlaced = 0;
     protected int secondsElapsed = 0;
     
+    public MinesGame(MinesBoard board, MinesStatus status)
+    {
+        super();
+    }
+    
     public GridBoard getBoardToView()
     {
         // TODO: Probably supposed to be a copy.
