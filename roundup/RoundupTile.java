@@ -58,7 +58,8 @@ class RoundupTile extends ImageIcon implements Renderable
 
     public String toString()
     {
-        return this.getRenderDescriptor().text;
+        //return this.getRenderDescriptor().text;
+        return this.robot.toString() + this.robotDirection.toString();
     }
 }
 

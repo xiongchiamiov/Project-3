@@ -306,6 +306,9 @@ public class RoundupBoard extends GridBoard<RoundupTile>
         {
             this.parent.gameWon = true;
             this.gameWonDialog();
+            //System.out.println(java.util.Arrays.deepToString(this.grid));
+            for (int i = 0; i < this.kBoardHeight; i++)
+                System.out.println(java.util.Arrays.toString(this.grid[i]));
         }
         
         // Tell the previous tile they don't have a robot.
