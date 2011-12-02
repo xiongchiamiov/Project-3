@@ -68,6 +68,12 @@ public class RoundupGame extends GridGame implements CursorKeyAdapter
         this.updateStatusBar();
         setChanged();
         notifyObservers();
+        
+        if (this.gameLost)
+        {
+            setChanged();
+            notifyObservers("fadedbkgd");
+        }
     }
     public void processLeft()
     {
@@ -75,6 +81,12 @@ public class RoundupGame extends GridGame implements CursorKeyAdapter
         this.updateStatusBar();
         setChanged();
         notifyObservers();
+        
+        if (this.gameLost)
+        {
+            setChanged();
+            notifyObservers("fadedbkgd");
+        }
     }
     public void processRight()
     {
@@ -82,6 +94,12 @@ public class RoundupGame extends GridGame implements CursorKeyAdapter
         this.updateStatusBar();
         setChanged();
         notifyObservers();
+        
+        if (this.gameLost)
+        {
+            setChanged();
+            notifyObservers("fadedbkgd");
+        }
     }
     public void processUp()
     {
@@ -89,6 +107,12 @@ public class RoundupGame extends GridGame implements CursorKeyAdapter
         this.updateStatusBar();
         setChanged();
         notifyObservers();
+        
+        if (this.gameLost)
+        {
+            setChanged();
+            notifyObservers("fadedbkgd");
+        }
     }
     
     public void restart()

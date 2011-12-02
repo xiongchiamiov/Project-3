@@ -272,6 +272,7 @@ public class RoundupBoard extends GridBoard<RoundupTile>
             this.grid[row][column].robot = RoundupTile.Robot.dead;
             this.grid[row][column].robotDirection = direction;
             this.parent.gameLost = true;
+            
             return RoundupTile.Robot.none;
         }
         
