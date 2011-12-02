@@ -121,6 +121,7 @@ public class RoundupGame extends GridGame implements CursorKeyAdapter
     {
         this.gridBoard.resetBoard();
         this.moveList = new StringBuilder();
+        this.moves = 0;
         this.gameLost = false;
         this.updateStatusBar();
         setChanged();
