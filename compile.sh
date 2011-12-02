@@ -1,4 +1,4 @@
 #!/bin/sh
 
-javac -cp libs/GridGame3.4.jar:. $1
+javac -cp libs/GridGame3.4.jar:. $*
 
