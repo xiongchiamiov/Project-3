@@ -22,7 +22,7 @@ public class MahjonggGame extends GridGame
     protected GridStatus gridStatus;
     private int secondsElapsed = 0;
     
-    public MahjonggGame(MahjonggBoard board, MahjonggStatus status)
+    public MahjonggGame(GridBoard board, GridStatus status)
     {
         super();
     }

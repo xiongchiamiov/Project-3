@@ -27,7 +27,7 @@ public class MinesGame extends GridGame
     protected int flagsPlaced = 0;
     protected int secondsElapsed = 0;
     
-    public MinesGame(MinesBoard board, MinesStatus status)
+    public MinesGame(GridBoard board, GridStatus status)
     {
         super();
     }

@@ -30,7 +30,7 @@ public class RoundupGame extends GridGame implements CursorKeyAdapter
     protected boolean gameWon = false;
     protected StringBuilder moveList;
     
-    public RoundupGame(RoundupBoard board, RoundupStatus status)
+    public RoundupGame(GridBoard board, GridStatus status)
     {
         super();
     }
