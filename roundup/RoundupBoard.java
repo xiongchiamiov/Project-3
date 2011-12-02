@@ -251,6 +251,12 @@ public class RoundupBoard extends GridBoard<RoundupTile>
             return;
         }
         
+        // Append this move to the list of moves we've made this game.
+        this.parent.moveList.append(this.selectedRobotRow);
+        this.parent.moveList.append(this.selectedRobotColumn);
+        char directionLetter = direction.toString().charAt(0);
+        this.parent.moveList.append(Character.toUpperCase(directionLetter));
+        
         this.clearDots();
         // Temporarily pull robot off the board for the sake of our recursive algorithm.
         RoundupTile.Robot movingRobot = this.grid[this.selectedRobotRow][this.selectedRobotColumn].robot;
@@ -327,6 +333,7 @@ public class RoundupBoard extends GridBoard<RoundupTile>
              new HallOfFame<HallOfFameEntry<String>>("roundup");
             hallOfFame.add(RoundupHallOfFameEntry.generate(this.parent.secondsElapsed,
                                                            this.parent.getGame(),
+                                                           this.parent.moveList.toString(),
                                                            name));
         }
     }
