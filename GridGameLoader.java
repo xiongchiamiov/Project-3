@@ -54,7 +54,7 @@ public class GridGameLoader
         {
             gridStatus = gridStatusClass.newInstance();
             gridBoard = gridBoardClass.newInstance();
-            gridGame = (GridGame)gridGameClass.newInstance();
+            gridGame = gridGameClass.newInstance();
             //Constructor<GridGUI> gridGuiConstructor = gridGuiClass.getConstructor(
             // new Class[] { String.class, gridGameClass });
             //gridGUI = gridGuiConstructor.newInstance(
