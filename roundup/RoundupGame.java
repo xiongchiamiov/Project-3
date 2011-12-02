@@ -53,6 +53,11 @@ public class RoundupGame extends GridGame implements CursorKeyAdapter
     
     public void makeMove(int row, int col)
     {
+        if (this.gameLost)
+        {
+            return;
+        }
+        
         this.gridBoard.clickTile(row, col);
         this.updateStatusBar();
         setChanged();
